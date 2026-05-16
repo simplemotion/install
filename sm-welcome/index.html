@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SimpleMotion - Welcome</title>
+<meta name="description" content="SimpleMotion - Welcome">
+<meta property="og:title" content="SimpleMotion - Welcome">
+<meta property="og:description" content="SimpleMotion - Welcome">
+<meta name="twitter:title" content="SimpleMotion - Welcome">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0a0a0a;color:#e8e8e8;font-family:'Noto Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center}
+  .card{max-width:774px;width:100%;padding:48px 40px;background:#1a1a1a;border-radius:12px;text-align:center}
+  .banner{display:block;margin:0 auto 32px;max-width:431px;height:auto}
+  h1{font-size:1.5rem;font-weight:400;margin-bottom:8px;color:#e8e8e8}
+  .name{color:#ff6900;font-weight:600}
+  .subtitle{color:#999;font-size:0.95rem;margin-bottom:32px;line-height:1.5}
+  .platform{display:inline-block;padding:4px 12px;border-radius:4px;background:#222;color:#ff6900;font-weight:600;font-size:0.9rem;margin-bottom:24px}
+  .channel-toggle{display:inline-flex;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:6px;padding:3px;margin-bottom:24px;gap:2px}
+  .channel-btn{background:transparent;border:none;color:#999;padding:6px 16px;border-radius:4px;cursor:pointer;font-size:0.8rem;font-weight:500;transition:all 0.15s;font-family:inherit}
+  .channel-btn:hover{color:#e8e8e8}
+  .channel-btn.active{background:#ff6900;color:#fff}
+  .channel-btn:disabled{color:#555;cursor:not-allowed}
+  .channel-btn:disabled:hover{color:#555}
+  .cmd-box{background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;text-align:left;margin-bottom:0;display:flex;align-items:stretch;height:78px;overflow:hidden}
+  .cmd-box code{font-family:'SF Mono','Fira Code','Courier New',monospace;font-size:0.82rem;color:#e8e8e8;word-break:normal;overflow-wrap:break-word;line-height:1.45;flex:1;padding:0 20px;min-width:0;display:flex;align-items:center;justify-content:center;text-align:center}
+  .copy-btn{background:#222;border:1px solid #2a2a2a;border-radius:5px;color:#999;cursor:pointer;transition:all 0.15s;width:72px;height:72px;margin:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:0}
+  .copy-btn:hover{color:#e8e8e8;background:#2a2a2a;border-color:#ff6900}
+  .copy-btn.copied{color:#22c55e;background:#1a2a1a;border-color:#22c55e}
+  .copy-btn svg{width:22px;height:22px;display:block}
+  .copy-btn .icon-check{display:none}
+  .copy-btn.copied .icon-copy{display:none}
+  .copy-btn.copied .icon-check{display:block}
+  .cmd-meta{color:#999;font-size:0.88rem;font-family:'SF Mono','Fira Code','Courier New',monospace;letter-spacing:0.02em;margin:24px 0;text-align:center;display:flex;flex-wrap:nowrap;gap:4px 10px;justify-content:center;align-items:baseline;white-space:nowrap}
+  .cmd-meta .sep{color:#999}
+  .cmd-meta .verify{color:#999}
+  .cmd-meta .verify.ok::before{content:'✓';color:#22c55e;margin-right:5px;font-weight:700}
+  .cmd-meta .verify.fail::before{content:'✗';color:#ef4444;margin-right:5px;font-weight:700}
+  .cmd-meta strong{color:#999;font-weight:500}
+  .steps{text-align:left;color:#999;font-size:0.85rem;line-height:1.8;margin-top:24px;border-top:1px solid #2a2a2a;padding-top:24px}
+  .steps strong{color:#e8e8e8}
+  .footer{margin-top:32px;color:#666;font-size:0.8rem}
+  .footer a{color:#ff6900;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="card">
+  <img class="banner" src="https://new.simplemotion.com/img/email/sm-white-lockup.png" alt="SimpleMotion" width="431" height="63">
+  <h1>Welcome<span id="name-span"></span></h1>
+  <p class="subtitle">Open your terminal and paste the command below to set up your environment.</p>
+  <div class="platform" id="platform"></div>
+  <div class="channel-toggle" role="tablist" aria-label="Release channel">
+    <button class="channel-btn active" data-channel="release" type="button">Release</button>
+    <button class="channel-btn" data-channel="preview" type="button">Preview</button>
+    <button class="channel-btn" data-channel="testing" type="button" id="testing-btn" disabled title="Restricted to simplemotion.com / simplemotion.global email accounts">Testing</button>
+  </div>
+  <div class="cmd-box">
+    <code id="cmd"></code>
+    <button class="copy-btn" id="copy-btn" onclick="copyCmd()" aria-label="Copy command" title="Copy command">
+      <svg class="icon-copy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="9" y="9" width="13" height="13" rx="2"/>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+      </svg>
+      <svg class="icon-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M20 6 9 17l-5-5"/>
+      </svg>
+    </button>
+  </div>
+  <p class="cmd-meta">
+    <span><strong id="cmd-os">macOS</strong></span>
+    <span class="sep" aria-hidden="true">·</span>
+    <span><strong id="cmd-arch">aarch64</strong></span>
+    <span class="sep" aria-hidden="true">·</span>
+    <span class="verify ok" id="cmd-verify">sha256 + attestation</span>
+  </p>
+  <div class="steps">
+    <strong>What this does:</strong><br>
+    1. Downloads the SimpleMotion onboarding tool<br>
+    2. Installs Claude Code, gh CLI, and Rust<br>
+    3. Clones your employee repository<br>
+    4. Configures your development environment
+  </div>
+  <p class="footer">Questions? Email <a href="mailto:executive@simplemotion.com">executive@simplemotion.com</a></p>
+</div>
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var email = params.get('email') || '';
+  var name = params.get('name') || '';
+
+  if (name) {
+    document.getElementById('name-span').textContent = ', ' + name;
+  }
+
+  // Gate the Testing channel: enabled only for simplemotion.com /
+  // simplemotion.global email accounts. Other users see it grayed out.
+  var testingAllowed = /@(simplemotion\.com|simplemotion\.global)$/i.test(email);
+  if (testingAllowed) {
+    document.getElementById('testing-btn').disabled = false;
+    document.getElementById('testing-btn').removeAttribute('title');
+  }
+
+  var ua = navigator.userAgent;
+  var os = 'Linux';
+  if (/Mac/i.test(ua)) os = 'macOS';
+  else if (/Win/i.test(ua)) os = 'Windows';
+
+  var arch = 'x86_64';
+  if (/aarch64|arm64/i.test(ua)) arch = 'aarch64';
+  else if (os === 'macOS') arch = 'aarch64';
+
+  document.getElementById('platform').textContent = 'Detected: ' + os;
+  document.getElementById('cmd-os').textContent = os;
+  document.getElementById('cmd-arch').textContent = arch;
+
+  // Escape HTML so a hostile ?email=... can't inject markup when we
+  // render the command with innerHTML.
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function(c) {
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+    });
+  }
+
+  // Build the command parts for the given release channel.
+  //
+  // macOS/Linux: `curl … | bash -s -- args`. The `-s` tells bash to
+  // read the script from stdin (the pipe); `--` separates bash's own
+  // options from the positional args we want forwarded to the script.
+  // The inner `curl | bash` race that used to produce the (56)
+  // 'Failure writing output' message is fixed inside sm-welcome.sh
+  // itself (it now buffers install.sh before exec), so the outer
+  // pipe form is shell-paste-clean.
+  //
+  // Returns { head, tail } so the rendered command can break between
+  // the curl|bash invocation (head) and the --email/--channel args
+  // (tail). textContent of `head + <br> + tail` is one line, so the
+  // Copy button still emits a shell-pasteable string.
+  function buildCmd(channel) {
+    if (os === 'Windows') {
+      var prefix = [];
+      if (email) prefix.push('$env:SM_EMAIL="' + email + '"');
+      prefix.push('$env:SM_CHANNEL="' + channel + '"');
+      return {
+        head: 'irm https://get.simplemotion.com/sm-welcome.ps1 | iex',
+        tail: '',
+        leading: prefix.join('; ') + '; '
+      };
+    }
+    var args = '';
+    if (email) args += '--email ' + email + ' ';
+    args += '--channel ' + channel;
+    return {
+      head: 'curl -fsSL https://get.simplemotion.com/sm-welcome.sh | bash -s --',
+      tail: args,
+      leading: ''
+    };
+  }
+
+  function setChannel(channel) {
+    document.querySelectorAll('.channel-btn').forEach(function(b) {
+      b.classList.toggle('active', b.dataset.channel === channel);
+    });
+    var parts = buildCmd(channel);
+    // Render: a single .cmd-line wrapper (so the flex code element
+    // has one flex item to centre) containing head, an optional <br>,
+    // and tail. CSS text-align:center centres each line on its own.
+    // The Copy button reads the data-copy attribute, which holds the
+    // full single-line string so paste is shell-safe regardless of
+    // whitespace in the display.
+    var cmdEl = document.getElementById('cmd');
+    var html = '<span class="cmd-line">' + esc(parts.leading) + esc(parts.head);
+    if (parts.tail) html += '<br>' + esc(parts.tail);
+    html += '</span>';
+    cmdEl.innerHTML = html;
+    cmdEl.dataset.copy = parts.leading + parts.head + (parts.tail ? ' ' + parts.tail : '');
+
+    // Verify status: release + preview ship with sha256 + SLSA attestation
+    // (green ✓); testing is unverified (red ✗). Glyph-only — the
+    // ::before pseudo-element in CSS renders the colour-coded icon.
+    var verifyEl = document.getElementById('cmd-verify');
+    if (channel === 'testing') {
+      verifyEl.classList.remove('ok');
+      verifyEl.classList.add('fail');
+    } else {
+      verifyEl.classList.remove('fail');
+      verifyEl.classList.add('ok');
+    }
+  }
+
+  document.querySelectorAll('.channel-btn').forEach(function(b) {
+    b.addEventListener('click', function() {
+      if (b.disabled) return;
+      setChannel(b.dataset.channel);
+    });
+  });
+
+  // Default = release.
+  setChannel('release');
+})();
+
+function copyCmd() {
+  var cmdEl = document.getElementById('cmd');
+  var text = cmdEl.dataset.copy || cmdEl.textContent;
+  navigator.clipboard.writeText(text).then(function() {
+    var btn = document.getElementById('copy-btn');
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.classList.remove('copied');
+    }, 1800);
+  });
+}
+</script>
+</body>
+</html>
